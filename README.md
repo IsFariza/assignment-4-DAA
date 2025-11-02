@@ -113,6 +113,18 @@ single node graph, disconnected graph, empty graph.
 - The number of relaxations matched the number of edges, proving that every connection was processed exactly once.
 - So the performace grew linearly with input size, confirming good scalability and O(V+E) complexity
 
+## Bottlenecks and Structural Effects
+
+### SCC :
+The main bottleneck is performing two full DFS traversals. Denser graphs increased DFS visits and stack operations proportionally. Graphs with large SCCs took 
+more runtime, but overall growth remained linear.
+
+### Topological Sort:
+The bottleneck is updating in-degree counts and queue operations. Denser graphs caused more in-degree updates, but each vertex and edge was processed once, so performance grew linearly anyway.
+
+### Shortest/Longest Paths:
+The main cost was because of  edge relaxations. In dense DAGs, relaxations increased since every vertex had many outgoing edges. But because each edge is only processed once, runtime still O(V+E).
+Graphs with longer chains of nodes (deeper topological order) took slightly more time, but nothing major.
 
 ## Conclusion
 All algorithms showed linear growth in metrics, which matches with their theoretical time complexities O(V+E).There were no incorrect results in any dataset.
